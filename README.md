@@ -8,6 +8,10 @@ First, you need to install the `python-telegram-bot` library. Run the following 
 ```bash
 pip install python-telegram-bot
 ```
+You need to install the `pycountry` library. Run the following command in your terminal:
+```bash
+pip install pycountry
+```
 
 ### 2. Create a Bot Token
 To create a bot on Telegram and get your token, follow these steps:
