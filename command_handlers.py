@@ -1,18 +1,16 @@
 from telegram import Update
 from telegram.ext import ContextTypes
+from states import ASK_COUNTRY
 
 
-# Command to start the bot
 async def initiate_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text('Greetings! I am your bot. Ask me what is the date today?')
+    await update.message.reply_text('Welcome! To start searching for eSIM deals, please tell me the country.')
+    return ASK_COUNTRY  # Start the conversation
 
 
-# Command to provide help information
 async def assist_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text('Here comes the help')
+    await update.message.reply_text('This is the help message. You can start by typing /start to search for eSIM deals.')
 
 
-# Command for custom functionality
 async def personalize_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text('This is a custom command, you can put whatever you want here.')
-
+    await update.message.reply_text('This is a custom command response.')
