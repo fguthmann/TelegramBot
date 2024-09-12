@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from command_handlers import initiate_command, assist_command, personalize_command
 from conversation_logic import ask_country, ask_days, ask_gb, cancel
 from error_handling import log_error
-from states import ASK_COUNTRY, ASK_DAYS, ASK_GB  # Import the states
+from states import ASK_COUNTRY, ASK_DAYS, ASK_GB
 
 load_dotenv()
 API_TOKEN = os.getenv('API_TOKEN')

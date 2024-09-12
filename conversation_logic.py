@@ -1,7 +1,8 @@
 import pycountry
 from telegram import Update
 from telegram.ext import ContextTypes, ConversationHandler
-from states import ASK_COUNTRY, ASK_DAYS, ASK_GB  # Import states
+from states import ASK_COUNTRY, ASK_DAYS, ASK_GB
+from api_client import get_esim_data
 
 
 async def ask_country(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -47,14 +48,17 @@ async def ask_gb(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # Store the GB in user data
         context.user_data['gb'] = gb
 
-        # Get all the stored information from the user data
+        # Get the country, days, and GB from the user data
         country = context.user_data['country']
         days = context.user_data['days']
         gb = context.user_data['gb']
 
-        # Simulate querying a database for the best eSIM deal (this is where your query logic will go)
+        # Fetch eSIM data from the API
+        esim_data = get_esim_data(country)
+
+        # Respond with the eSIM data
         await update.message.reply_text(
-            f"Looking for the best eSIM deal for {country} for {days} days with {gb}GB of data..."
+            f"Looking for the best eSIM deal for {country} for {days} days with {gb}GB of data...\n{esim_data}"
         )
 
         # End the conversation after providing the response

@@ -10,7 +10,8 @@ pip install python-telegram-bot
 ```
 You need to install the `pycountry` library. Run the following command in your terminal:
 ```bash
-pip install pycountry
+pip install pycountry fastapi uvicorn pymongo requests
+
 ```
 
 ### 2. Create a Bot Token
