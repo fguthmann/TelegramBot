@@ -10,6 +10,5 @@ def filter_esims_by_criteria(esims, min_days, min_gb):
 
 
 def sort_esims_by_prices(esims):
-    # Sort the filtered eSIMs by price in ascending order
     sorted_esims = sorted(esims, key=lambda esim: esim["price"])
     return sorted_esims

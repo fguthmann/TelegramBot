@@ -14,7 +14,6 @@ def get_esim_data(country: str, min_days: int, min_gb: float):
     esims = response.json()
 
     # Filter eSIMs based on min_days and min_gb if provided
-    esims = filter_esims_by_criteria(esims, min_days, min_gb)
+    filtered_esims = filter_esims_by_criteria(esims, min_days, min_gb)
 
-
-    return esims
+    return filtered_esims
