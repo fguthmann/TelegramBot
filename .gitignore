@@ -1,2 +1,5 @@
 .env
 esim_data.json
+venv
+.idea
+__pycache__
