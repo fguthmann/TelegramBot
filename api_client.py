@@ -1,7 +1,8 @@
 import requests
+from esim_filters import filter_esims_by_criteria
 
 
-def get_esim_data(country: str):
+def get_esim_data(country: str, min_days: int, min_gb: float):
     try:
         response = requests.get(f"http://127.0.0.1:8000/esim/{country}")
         response.raise_for_status()  # Raises an error for bad responses
@@ -10,5 +11,10 @@ def get_esim_data(country: str):
 
     if response.status_code == 404:
         return "No eSIM deals found for this country."
+    esims = response.json()
 
-    return response.json()
+    # Filter eSIMs based on min_days and min_gb if provided
+    esims = filter_esims_by_criteria(esims, min_days, min_gb)
+
+
+    return esims

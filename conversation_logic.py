@@ -7,7 +7,7 @@ from api_client import get_esim_data
 
 async def ask_country(update: Update, context: ContextTypes.DEFAULT_TYPE):
     country = update.message.text
-    print(f"Received country input: {country}")
+    country = country.capitalize()
 
     # Validate the country input using pycountry
     if not pycountry.countries.get(name=country):
@@ -51,15 +51,17 @@ async def ask_gb(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # Get the country, days, and GB from the user data
         country = context.user_data['country']
         days = context.user_data['days']
-        gb = context.user_data['gb']
 
-        # Fetch eSIM data from the API
-        esim_data = get_esim_data(country)
+        # Fetch eSIM data from the API by country
+        esim_data = get_esim_data(country, days, gb)
 
-        # Respond with the eSIM data
-        await update.message.reply_text(
-            f"Looking for the best eSIM deal for {country} for {days} days with {gb}GB of data...\n{esim_data}"
-        )
+        # Format the response to show only necessary details
+        if isinstance(esim_data, str):  # Error or "No eSIM found" message
+            await update.message.reply_text(esim_data)
+        else:
+            esim_list = "\n".join([f"Provider: {esim['provider']}, Price: {esim['price']}, Days: {esim['days']}, "
+                                   f"GB: {esim['gb']}" for esim in esim_data])
+            await update.message.reply_text(f"Here are the best eSIM deals:\n{esim_list}")
 
         # End the conversation after providing the response
         return ConversationHandler.END
