@@ -9,7 +9,8 @@ async def initiate_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def assist_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text('This is the help message. You can start by typing /start to search for eSIM deals.')
+    await update.message.reply_text('This is the help message. You can start by typing /start to search for '
+                                    'eSIM deals.')
 
 
 async def personalize_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
