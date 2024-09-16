@@ -35,11 +35,20 @@ def serialize_esim(esim):
 
 
 @app.get("/esim/{country}")
-async def get_esim_by_country(country: str):
-    esims = esims_collection.find({"country": country})
+async def get_esim_by_country(country: str, min_days: int, min_gb: float):
+    # Construct the MongoDB query
+    query = {
+        "country": country,
+        "days": {"$gte": min_days},
+        "gb": {"$gte": min_gb}
+    }
+
+    esims = esims_collection.find(query)
     esims_list = [serialize_esim(esim) for esim in esims]
+
     if not esims_list:
-        raise HTTPException(status_code=404, detail="No eSIMs found for this country")
+        raise HTTPException(status_code=404, detail="No eSIMs found for this country with the given criteria")
+
     return esims_list
 
 

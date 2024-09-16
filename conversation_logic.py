@@ -12,7 +12,7 @@ async def ask_country(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Validate the country input using pycountry
     if not pycountry.countries.get(name=country):
         await update.message.reply_text("This doesn't seem to be a valid country. Please enter a valid country name.")
-        return ASK_COUNTRY  # Stay on this state if invalid country
+        return ASK_COUNTRY
 
     # Store the country in user data
     context.user_data['country'] = country
