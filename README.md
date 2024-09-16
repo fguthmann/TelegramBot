@@ -1,16 +1,30 @@
-# TelegramBot
+# eSim Search TelegramBot
+
+## Overview
+
+This Telegram bot allows users to search for eSIM deals based on country, duration (days), and data requirements (GB).
+The bot interacts with a FastAPI backend, which queries a MongoDB database to provide relevant eSIM options. Users can
+interact with the bot to specify their criteria, and it will return a list of suitable eSIM deals sorted by price.
+
+
 
 ## Setting Up the Telegram Bot
 
 ### 1. Install Dependencies
-First, you need to install the `python-telegram-bot` library. Run the following command in your terminal:
+First, ensure you have python 3.8 or higher installed. Installed the required dependencies:
+
+-`python-telegram-bot`  
+-`pycountry`  
+-`fastapi`  
+-`uvicorn`  
+-`pymongo`  
+-`requests`  
+-`python-dotenv`  
+
+Run the following command in your terminal:
 
 ```bash
-pip install python-telegram-bot
-```
-You need to install the `pycountry` library. Run the following command in your terminal:
-```bash
-pip install pycountry fastapi uvicorn pymongo requests
+pip install python-telegram-bot pycountry fastapi uvicorn pymongo requests python-dotenv
 
 ```
 
@@ -27,8 +41,29 @@ To create a bot on Telegram and get your token, follow these steps:
     - **API_TOKEN**: The token you received from BotFather.
     - **BOT_HANDLE**: The username you created for your bot.
 
-### 3. Set Up Date API
-To handle date queries, make sure you download and set up the **DateAPI** as a microservice that works alongside your bot.
+### 3. Set Up Environment Variables:
+Create a `.env` file in the root of your project and add the following variables:
+``` bash 
+API_TOKEN=your_telegram_bot_api_token
+BOT_HANDLE= @your_telegram_bot_username
+FASTAPI_URL=http://localhost:8000
+DB_ADDRESS=your_mongodb_connection_string
+```
 
-### 4. You're Ready to Start!
-Once everything is set up, you can start your bot and Date API and begin interacting with your Telegram bot.
+### 4. Set Up the FastAPI Backend
+
+Start the FastAPI server to handle requests from the bot:
+``` bash 
+uvicorn app:app --reload
+```
+This will start the FastAPI server on http://localhost:8000 by default.
+
+### 5. Start the Telegram Bot
+Once everything is set up, start your Telegram bot by running:
+
+``` bash 
+python main.py
+```
+### 6. Interact with the Bot
+You can now interact with your bot on Telegram. Simply start a conversation with your bot's username and follow the 
+prompts to search for eSIM deals.
