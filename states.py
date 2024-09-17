@@ -1,1 +1,0 @@
-ASK_COUNTRY, ASK_DAYS, ASK_GB = range(3)

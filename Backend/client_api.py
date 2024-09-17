@@ -1,5 +1,5 @@
 import requests
-from esim_utils import sort_esims_by_prices
+from Core.esim_utils import sort_esims_by_prices
 import os
 from dotenv import load_dotenv
 
